@@ -11,13 +11,17 @@ $(document).ready(function() {
 	//Chargement des images supplémentaires :
 	$('.aside-img > i').click(function(e) {
 		for (var i = 4; i <= parseInt($('#restoNbImg').val()); i++) {
-			var $img = $('<img class="img-openable" src="upload/resto-' + $('#restoId').val() + '-' + i + '.jpg">');
+			var $img = $('<img class="img-openable" src="upload/resto-' + $('#restoId').val() + '-' + i + '.jpg" style="display: none;">');
 			$(this).parent().append($img);
 		}
-		$(this).parent().children('img:hidden').each(function(e) {
-			$(this).slideDown(100);
-		});
-		$(this).remove();
+		var thisItem = $(this);
+		setTimeout(function() {
+			thisItem.parent().children('img').not(':visible').each(function(e) {
+				$(this).slideDown(100);
+			});
+			thisItem.remove();
+		}, 500);
+
 	});
 
 });

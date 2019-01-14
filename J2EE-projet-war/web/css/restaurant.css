@@ -5,6 +5,7 @@
 }
 
 .aside-img > img {
+	transition: border-radius 0.5s, margin 1s;
 	width: 100%;
 	margin-bottom: 2px;
 	display: block;
@@ -58,6 +59,43 @@
 .categories-list > span:hover {
 	background-color: #e0e0e0;
 }
+
+
+.resto-contact {
+	margin: 15px 5px;
+}
+
+.resto-contact p {
+	font-size: 0;
+}
+
+.resto-contact i {
+	font-size: 16px;
+	margin-right: 5px;
+}
+
+.resto-contact span {
+	font-size: 16px;
+	color: #000;
+}
+
+
+.resto-desc {
+	background-color: #f4f4f4;
+	padding: 20px 10px;
+	border-radius: 3px;
+}
+
+.resto-desc h2 {
+	border-bottom: 1px solid #00bfa5;
+	padding-bottom: 5px;
+}
+
+.resto-desc p {
+	line-height: 22px;
+	margin-bottom: 0;
+}
+
 
 .tab-nav {
 	list-style: none;

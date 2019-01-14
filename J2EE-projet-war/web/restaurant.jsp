@@ -70,16 +70,26 @@
 					<%= restoAdresse %><br>
 					<%= restoCodePostal %> <%= restoVille %>
 				</p>
-				<div style="margin: 15px 5px;">
-					<p style="font-size: 16px;"><a href="tel:<%= restoNumTel %>"><i class="fas fa-phone fa-flip-horizontal" style="margin-right: 5px;"></i><span style="color: #000;"><%= restoNumTel %></span></a></p>
-					<p style="font-size: 16px;"><a href="mailto:<%= restoEmail %>"><i class="fas fa-comment-alt" style="margin-right: 5px;"></i><span style="color: #000;"><%= restoEmail %></span></a></p>
+				<div class="resto-contact">
+					<p>
+						<a href="tel:<%= restoNumTel %>">
+							<i class="fas fa-phone fa-flip-horizontal"></i>
+							<span><%= restoNumTel %></span>
+						</a>
+					</p>
+					<p>
+						<a href="mailto:<%= restoEmail %>">
+							<i class="fas fa-comment-alt"></i>
+							<span><%= restoEmail %></span>
+						</a>
+					</p>
 				</div>
-				<div style="background-color: #f4f4f4; padding: 20px 10px; border-radius: 3px;">
-				<h2 style="border-bottom: 1px solid #00bfa5; padding-bottom: 5px;">Quelques mots sur le restaurant</h2>
-				<p style="line-height: 22px; margin-bottom: 0;">
-					<%= restoDesc %>
-				</p>
-			</div>
+				<div class="resto-desc">
+					<h2>Quelques mots sur le restaurant</h2>
+					<p>
+						<%= restoDesc %>
+					</p>
+				</div>
 				<div style="background-color: #fff; border: 1px solid #e4e4e4; border-top: 0; border-radius: 0 0 3px 3px; padding: 10px; margin: 20px 0 10px;">
 					<ul class="tab-nav">
 						<li show="menu" class="active">Menu</li>

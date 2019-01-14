@@ -1,3 +1,5 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+		<% if (afficherFooter) { %>
 		<footer>
 			<div>
 				<ul>
@@ -28,12 +30,13 @@
 				<a href="" title><i class="fab fa-twitter"></i></a>
 			</div>
 		</footer>
+		<% } %>
 
 		<!-- Import de jQuery 3.3.1 -->
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<script src="js/main.js"></script>
 		<% if (!fichierJS.equals("")) { %>
-		<script src="js/<%= fichierJS %>.js"></script>
+		<script src="<%= fichierJS %>"></script>
 		<% } %>
 	</body>
 </html>

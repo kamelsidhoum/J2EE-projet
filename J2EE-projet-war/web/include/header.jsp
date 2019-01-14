@@ -1,3 +1,4 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -10,7 +11,7 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/main.css">
 		<% if (!fichierCSS.equals("")) { %>
-		<link rel="stylesheet" href="css/<%= fichierCSS %>.css">
+		<link rel="stylesheet" href="<%= fichierCSS %>">
 		<% } %>
 	</head>
 	<body>

@@ -1,19 +1,51 @@
-<%
-	String titre = "Le Crous de Dauphine";
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.ArrayList" %>
+<%!
+	String titre = "";
 	boolean afficherHeader = true;
 	boolean afficherFooter = true;
-	String fichierCSS = ""; //Ne PAS ajouter le .js, UNIQUEMENT le NOM DU FICHIER
-	String fichierJS = ""; //Ne PAS ajouter le .js, UNIQUEMENT le NOM DU FICHIER
+	String fichierCSS = "css/restaurant.css"; //Mettre le CHEMIN du fichier + NOM du fichier + EXTENSION (.css)
+	String fichierJS = "js/restaurant.js"; //Mettre le CHEMIN du fichier + NOM du fichier + EXTENSION (.js)
 %>
-<jsp:include page="include/header.jsp"></jsp:include>
+
+<%
+	/* TEMPORAIRE, à remplacer par des données de la bdd */
+	int restoId = 1;
+	int restoUsproId = 1;
+	String restoNom = "Le CROUS de Dauphine";
+	String restoDesc = "Le CROUS de l'Université Paris Dauphine vous accueille tous les midis (et même le samedi, eh oui on chôme pas nous!) afin de déguster des plats savoureux préparés par nos chefs en cuisine.";
+	String restoNumSiret = "4893478583";
+	int restoNbCouvert = 10;
+	String restoAdresse = "Place du Maréchal de Lattre de Tassigny";
+	int restoCodePostal = 75016;
+	String restoVille = "Paris";
+	String restoNumTel = "+33 1 01 01 01 01";
+	String restoEmail = "crous@dauphine.fr";
+	String restoDateInscription = "13/01/2019";
+
+	int restoNbImg = 5; // Aller checker dans le dossier des uploads si on trouve des images des restos, et si oui combien
+
+	ArrayList restoListeCategorie = new ArrayList();
+	restoListeCategorie.add("Haute gastronomie de qualité");
+	restoListeCategorie.add("Produits du terroir");
+	restoListeCategorie.add("Fait maison");
+	restoListeCategorie.add("Végétarien");
+
+	titre = restoNom;
+%>
+<%@ include file="include/header.jsp" %>
 
 		<main>
-			<h1>Le CROUS de Dauphine</h1>
+			<input type="hidden" id="restoId" value="<%= restoId %>">
+			<input type="hidden" id="restoNbImg" value="<%= restoNbImg %>">
+			<h1><%= restoNom %></h1>
 			<aside class="aside-img">
-				<img class="img-openable" src="https://faceagroup.com/media/references/Restaurant%20CROUS%20Dauphine.jpg">
-				<img class="img-openable" src="https://faceagroup.com/media/references/Cuisines%20CROUS.jpg">
-				<i class="fas fa-arrow-circle-down" title="Voir plus de photos"></i>
-				<img class="img-openable" src="http://www.beguin-macchini.com/wp-content/uploads/2015/06/MG_0089.jpg">
+				<% for (int i = 1; i <= (restoNbImg > 3 ? 3 : restoNbImg); i++) { %>
+				<img class="img-openable" src="upload/resto-<%= restoId %>-<%= i %>.jpg">
+				<% if (restoNbImg > 3 && i == 2) { %>
+					<i class="fas fa-arrow-circle-down" title="Voir plus de photos"></i>
+				<% } %>
+				<% } %>
 			</aside>
 			<article>
 				<p style="margin: 0; text-align: right; font-size: 0; float: right; margin-left: 50px;">
@@ -30,34 +62,29 @@
 					<span style="display: block; font-size: 14px; color: #aaa;">4 avis</span>
 				</p>
 				<p class="categories-list">
-					<span>Haute gastronomie de qualité</span>
-					<span>Produits du terroir</span>
-					<span>Fait maison</span>
-					<span>Végétarien</span>
+					<% for (int i = 0; i < restoListeCategorie.size(); i++) { %>
+					<span><%= restoListeCategorie.get(i) %></span>
+					<% } %>
 				</p>
 				<p>
-					Place du Maréchal de Lattre de Tassigny<br>
-					75016 Paris
+					<%= restoAdresse %><br>
+					<%= restoCodePostal %> <%= restoVille %>
 				</p>
 				<div style="margin: 15px 5px;">
-					<p style="font-size: 16px;"><a href="tel:+33101010101"><i class="fas fa-phone fa-flip-horizontal" style="margin-right: 5px;"></i><span style="color: #000;">+33 1 01 01 01 01</span></a></p>
-					<p style="font-size: 16px;"><a href="mailto:crous@dauphine.fr"><i class="fas fa-comment-alt" style="margin-right: 5px;"></i><span style="color: #000;">crous@dauphine.fr</span></a></p>
+					<p style="font-size: 16px;"><a href="tel:<%= restoNumTel %>"><i class="fas fa-phone fa-flip-horizontal" style="margin-right: 5px;"></i><span style="color: #000;"><%= restoNumTel %></span></a></p>
+					<p style="font-size: 16px;"><a href="mailto:<%= restoEmail %>"><i class="fas fa-comment-alt" style="margin-right: 5px;"></i><span style="color: #000;"><%= restoEmail %></span></a></p>
 				</div>
 				<div style="background-color: #f4f4f4; padding: 20px 10px; border-radius: 3px;">
 				<h2 style="border-bottom: 1px solid #00bfa5; padding-bottom: 5px;">Quelques mots sur le restaurant</h2>
 				<p style="line-height: 22px; margin-bottom: 0;">
-					Le CROUS de l'Université Paris Dauphine vous accueille tous les midis (et même le samedi, eh oui on chôme pas nous!) afin de déguster des plats savoureux préparés par nos chefs en cuisine.
+					<%= restoDesc %>
 				</p>
 			</div>
 				<div style="background-color: #fff; border: 1px solid #e4e4e4; border-top: 0; border-radius: 0 0 3px 3px; padding: 10px; margin: 20px 0 10px;">
 					<ul class="tab-nav">
-						<li show="annonces">Annonces</li>
 						<li show="menu" class="active">Menu</li>
 						<li show="avis">Avis</li>
 					</ul>
-					<div id="annonces-tab" style="display: none;">
-						<p>Annonces écrites par le restaurateur............</p>
-					</div>
 					<div id="menu-tab">
 						<p>Menu du restaurant............</p>
 						<p style="border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px; text-align: center; color: #aaa;">Les prix et les plats sont susceptibles de changer. Les prix affichés tiennent compte de la TVA.</p>
@@ -67,7 +94,7 @@
 							<i class="fas fa-users" style="font-size: 50px; margin-right: 10px; display: inline-block; vertical-align: middle; width: 70px;"></i>
 							<span style="display: inline-block; vertical-align: middle; width: calc(350px - 80px); font-size: 15px; text-align: left;">Retrouvez ici les avis des clients ayant été dans ce restaurant après avoir réservé une table via The Spoon.</span>
 						</p>
-						<label for="avis-input">Vous avez été au restaurant Le CROUS de Dauphine ?</label>
+						<label for="avis-input">Vous avez été au restaurant <%= restoNom %> ?</label>
 						<textarea id="avis-input" placeholder="Écrivez votre avis..." style="resize: none; width: 100%; padding: 0; border: 0; background-color: #fff; font-family: inherit; font-size: 17px; color: #000; margin: 10px 0;"></textarea>
 						<!--<label>Quelle note mettriez-vous à ce restaurant ?</label>
 						<i class="fas fa-minus-circle" title="Diminuer la note"></i>
@@ -85,4 +112,4 @@
 			</article>
 		</main>
 
-<jsp:include page="include/footer.jsp"></jsp:include>
+<%@ include file="include/footer.jsp" %>

@@ -5,7 +5,7 @@
  */
 package com.dauphine.bean.src;
 
-import com.dauphine.entity.src.Utilisateurparticulier;
+import com.dauphine.entity.src.UtilisateurProfessionnel;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -13,12 +13,8 @@ import javax.ejb.Remote;
  *
  * @author Stark
  */
-
 @Remote
-public interface IGestionUserParticulier {
-    
-    public void add(String nom, String prenom, String numTel, String email, String password);
-    public List<Utilisateurparticulier> getUtilisateurByEmail(String email);
-    
-    
+public interface IGestionUserPro {
+    public void add(String nom, String prenom, String numTel,String adresse, String mail, String mdp, String siret);
+    public List<UtilisateurProfessionnel> getUserProByEmail(String email);
 }

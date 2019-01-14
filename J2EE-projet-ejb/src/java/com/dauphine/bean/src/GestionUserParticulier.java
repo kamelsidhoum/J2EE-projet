@@ -7,11 +7,13 @@ package com.dauphine.bean.src;
 
 
 import com.dauphine.entity.src.Utilisateurparticulier;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -47,8 +49,10 @@ public class GestionUserParticulier implements IGestionUserParticulier{
     }
 
     @Override
-    public List<Utilisateurparticulier> getUtilisateur(String nom, String prenom) {
-         return null;
+    public List<Utilisateurparticulier> getUtilisateurByEmail(String email) {
+        Query q = em.createNamedQuery("Utilisateurparticulier.findByUsparMail");
+        q.setParameter("usparMail", email);
+        return q.getResultList();
     }
 
     // Add b0usiness logic below. (Right-click in editor and choose

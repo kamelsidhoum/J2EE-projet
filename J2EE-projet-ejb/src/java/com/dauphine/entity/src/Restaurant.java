@@ -39,14 +39,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Restaurant.findAll", query = "SELECT r FROM Restaurant r")
     , @NamedQuery(name = "Restaurant.findByResId", query = "SELECT r FROM Restaurant r WHERE r.resId = :resId")
     , @NamedQuery(name = "Restaurant.findByResNom", query = "SELECT r FROM Restaurant r WHERE r.resNom = :resNom")
-    , @NamedQuery(name = "Restaurant.findByResNumSiret", query = "SELECT r FROM Restaurant r WHERE r.resNumSiret = :resNumSiret")
     , @NamedQuery(name = "Restaurant.findByResNbCouvert", query = "SELECT r FROM Restaurant r WHERE r.resNbCouvert = :resNbCouvert")
     , @NamedQuery(name = "Restaurant.findByResAdresse", query = "SELECT r FROM Restaurant r WHERE r.resAdresse = :resAdresse")
     , @NamedQuery(name = "Restaurant.findByResNumeroTel", query = "SELECT r FROM Restaurant r WHERE r.resNumeroTel = :resNumeroTel")
     , @NamedQuery(name = "Restaurant.findByResEmail", query = "SELECT r FROM Restaurant r WHERE r.resEmail = :resEmail")
     , @NamedQuery(name = "Restaurant.findByResCodePostal", query = "SELECT r FROM Restaurant r WHERE r.resCodePostal = :resCodePostal")
     , @NamedQuery(name = "Restaurant.findByResVille", query = "SELECT r FROM Restaurant r WHERE r.resVille = :resVille")
-    , @NamedQuery(name = "Restaurant.findByResDateInscription", query = "SELECT r FROM Restaurant r WHERE r.resDateInscription = :resDateInscription")})
+    , @NamedQuery(name = "Restaurant.findByResDateInscription", query = "SELECT r FROM Restaurant r WHERE r.resDateInscription = :resDateInscription")
+    , @NamedQuery(name = "Restaurant.findByResNbImg", query = "SELECT r FROM Restaurant r WHERE r.resNbImg = :resNbImg")})
 public class Restaurant implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,10 +60,6 @@ public class Restaurant implements Serializable {
     @Size(min = 1, max = 254)
     @Column(name = "res_nom")
     private String resNom;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "res_num_siret")
-    private int resNumSiret;
     @Basic(optional = false)
     @NotNull
     @Column(name = "res_nb_couvert")
@@ -92,6 +88,10 @@ public class Restaurant implements Serializable {
     @Column(name = "res_date_inscription")
     @Temporal(TemporalType.DATE)
     private Date resDateInscription;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "res_nb_img")
+    private int resNbImg;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "notRestoId")
     private Collection<Notation> notationCollection;
     @JoinColumn(name = "res_uspro_id", referencedColumnName = "uspro_id")
@@ -109,15 +109,15 @@ public class Restaurant implements Serializable {
         this.resId = resId;
     }
 
-    public Restaurant(Integer resId, String resNom, int resNumSiret, int resNbCouvert, String resAdresse, int resNumeroTel, String resEmail, Date resDateInscription) {
+    public Restaurant(Integer resId, String resNom, int resNbCouvert, String resAdresse, int resNumeroTel, String resEmail, Date resDateInscription, int resNbImg) {
         this.resId = resId;
         this.resNom = resNom;
-        this.resNumSiret = resNumSiret;
         this.resNbCouvert = resNbCouvert;
         this.resAdresse = resAdresse;
         this.resNumeroTel = resNumeroTel;
         this.resEmail = resEmail;
         this.resDateInscription = resDateInscription;
+        this.resNbImg = resNbImg;
     }
 
     public Integer getResId() {
@@ -134,14 +134,6 @@ public class Restaurant implements Serializable {
 
     public void setResNom(String resNom) {
         this.resNom = resNom;
-    }
-
-    public int getResNumSiret() {
-        return resNumSiret;
-    }
-
-    public void setResNumSiret(int resNumSiret) {
-        this.resNumSiret = resNumSiret;
     }
 
     public int getResNbCouvert() {
@@ -198,6 +190,14 @@ public class Restaurant implements Serializable {
 
     public void setResDateInscription(Date resDateInscription) {
         this.resDateInscription = resDateInscription;
+    }
+
+    public int getResNbImg() {
+        return resNbImg;
+    }
+
+    public void setResNbImg(int resNbImg) {
+        this.resNbImg = resNbImg;
     }
 
     @XmlTransient

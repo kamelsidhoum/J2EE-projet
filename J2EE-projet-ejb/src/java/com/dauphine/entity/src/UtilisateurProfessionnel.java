@@ -42,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "UtilisateurProfessionnel.findByUsproAdresse", query = "SELECT u FROM UtilisateurProfessionnel u WHERE u.usproAdresse = :usproAdresse")
     , @NamedQuery(name = "UtilisateurProfessionnel.findByUsproMail", query = "SELECT u FROM UtilisateurProfessionnel u WHERE u.usproMail = :usproMail")
     , @NamedQuery(name = "UtilisateurProfessionnel.findByUsproMotPasse", query = "SELECT u FROM UtilisateurProfessionnel u WHERE u.usproMotPasse = :usproMotPasse")
-    , @NamedQuery(name = "UtilisateurProfessionnel.findByUsproDate", query = "SELECT u FROM UtilisateurProfessionnel u WHERE u.usproDate = :usproDate")})
+    , @NamedQuery(name = "UtilisateurProfessionnel.findByUsproDate", query = "SELECT u FROM UtilisateurProfessionnel u WHERE u.usproDate = :usproDate")
+    , @NamedQuery(name = "UtilisateurProfessionnel.findByUsproSiret", query = "SELECT u FROM UtilisateurProfessionnel u WHERE u.usproSiret = :usproSiret")})
 public class UtilisateurProfessionnel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -86,6 +87,9 @@ public class UtilisateurProfessionnel implements Serializable {
     @Column(name = "uspro_date")
     @Temporal(TemporalType.DATE)
     private Date usproDate;
+    @Size(max = 254)
+    @Column(name = "uspro_siret")
+    private String usproSiret;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "annUsproId")
     private Collection<Annonce> annonceCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "resUsproId")
@@ -173,6 +177,14 @@ public class UtilisateurProfessionnel implements Serializable {
 
     public void setUsproDate(Date usproDate) {
         this.usproDate = usproDate;
+    }
+
+    public String getUsproSiret() {
+        return usproSiret;
+    }
+
+    public void setUsproSiret(String usproSiret) {
+        this.usproSiret = usproSiret;
     }
 
     @XmlTransient
